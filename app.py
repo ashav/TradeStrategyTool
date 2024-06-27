@@ -38,27 +38,27 @@ def generate_heatmap_data(portfolio_value, avg_profit, avg_loss, trades_per_week
 def main():
     st.title("Trading Strategy Analysis Tool")
 
-    with st.expander("1. Strategy Expectancy Calculator"):
+    with st.expander("1. Strategy Expectancy Calculator",expanded=True):
         win_rate = st.slider("Win Rate (%)", min_value=0, max_value=100, value=98)
         avg_profit = st.number_input("Average Profit for Wins ($)", min_value=0, value=104, format="%d")
         avg_loss = st.number_input("Average Loss for Losses ($)", min_value=0, value=402, format="%d")
         expectancy = calculate_expectancy(win_rate, avg_profit, avg_loss)
         st.write("Expectancy of the Strategy: $", round(expectancy, 2))
 
-    with st.expander("2. Risk Management"):
+    with st.expander("2. Risk Management",expanded=True):
         portfolio_value = st.number_input("Portfolio Value ($)", min_value=0, value=1000000, step=100000)
         max_loss_percent = st.slider("Max Loss per Trade (%)", min_value=0.01, max_value=3.0, value=1.0, step=0.01)
         number_of_contracts = calculate_contracts(portfolio_value, max_loss_percent, avg_loss)
         st.write("Maximum Number of Contracts to Trade: ", int(number_of_contracts))
 
-    with st.expander("3. Trade Frequency and Yearly Profits"):
+    with st.expander("3. Trade Frequency and Yearly Profits",expanded=True):
         trades_per_week = st.slider("Number of Trades per Week", min_value=1, max_value=5, value=3)
         yearly_profit = calculate_yearly_profit(expectancy, number_of_contracts, trades_per_week)
         st.write("Yearly Profit: $", round(yearly_profit, 2))
         profit_ratio = yearly_profit / portfolio_value * 100 if portfolio_value else 0
         st.write("Yearly Profit as % of Portfolio: ", round(profit_ratio, 2), "%")
 
-    with st.expander("4. Risk vs. Win Rate Heatmap (Yearly Profit %)"):
+    with st.expander("4. Risk vs. Win Rate Heatmap (Yearly Profit %)",expanded=True):
         heatmap_df = generate_heatmap_data(portfolio_value, avg_profit, avg_loss, trades_per_week)
         fig, ax = plt.subplots()
         sns.heatmap(heatmap_df, annot=True, cmap='RdYlGn', center=0, fmt=".2f", linewidths=.5, ax=ax)
