@@ -1,2 +1,3 @@
 # TradeStrategyTool
-A simple Trading Strategy Analysis Tool for Streamlit
+A simple Trading Strategy Analysis Tool deployed using Streamlit.
+
