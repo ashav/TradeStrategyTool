@@ -84,7 +84,7 @@ def main():
         st.write("Maximum Number of Contracts to Trade (rounded): ", int(number_of_contracts))
         st.write("Buying Power Reduction (BPR) per Trade ($)", bpr*int(number_of_contracts))
         st.write("Max Portfolio Loss: $", number_of_contracts*avg_loss)
-        trades_per_week = st.slider("Number of Trades per Week", min_value=0.5, max_value=5.0, value=3.0, step=0.5)
+        trades_per_week = st.slider("Number of Trades per Week", min_value=0.5, max_value=5.0, value=1.0, step=0.5)
         yearly_profit = calculate_yearly_profit(expectancy, number_of_contracts, trades_per_week)
         st.write("Yearly Profit: $", round(yearly_profit, 2))
         profit_ratio = yearly_profit / portfolio_value * 100 if portfolio_value else 0
